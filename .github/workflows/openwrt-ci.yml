@@ -61,6 +61,13 @@ jobs:
           git remote add openwrt https://github.com/coolsnowwolf/lede.git
           git pull openwrt master
           git remote -v
+          
+      - name: 主题包下载
+        run: |
+          cd package
+          mkdir openwrt-packages
+          cd openwrt-packages
+          git clone https://github.com/openwrt-develop/luci-theme-atmaterial.git
 
       - name: Update feeds
         run: |
@@ -174,9 +181,10 @@ jobs:
           # EOF
 
           # LuCI主题:
-          # cat >> .config <<EOF
-          # CONFIG_PACKAGE_luci-theme-argon=y
-          # CONFIG_PACKAGE_luci-theme-netgear=y
+          cat >> .config <<EOF
+          CONFIG_PACKAGE_luci-theme-argon=y
+          CONFIG_PACKAGE_luci-theme-netgear=y
+          CONFIG_PACKAGE_luci-theme-atmaterial=y
           # EOF
 
           # 常用软件包:
